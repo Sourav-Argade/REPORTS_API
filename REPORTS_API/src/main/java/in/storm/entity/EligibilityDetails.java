@@ -1,0 +1,30 @@
+package in.storm.entity;
+
+import java.time.LocalDate;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
+
+@Entity
+@Table(name = "ELIGIBILITY_DETAILS")
+@Data
+public class EligibilityDetails {
+	
+	@Id
+	private Integer eligId;
+	private String name;
+	private long mobile;
+	private String email;
+	private Character gender;
+	private long ssn;
+	private String planName;
+	private String planStatus;
+	private LocalDate planStartDate;
+	private LocalDate planEndDate;
+	private LocalDate createDate;
+	private LocalDate updateDate;
+	private String createdBy;
+	private String updatedBy;
+}

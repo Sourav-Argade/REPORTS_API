@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: REPORTS_API
+  datasource:
+    username: root
+    password: admin@123
+    url: jdbc:mysql://localhost:3306/reports
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
