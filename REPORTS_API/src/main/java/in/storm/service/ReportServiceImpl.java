@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.domain.Example;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,7 +78,28 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public void generateExcel(HttpServletResponse response) {
-		// TODO Auto-generated method stub
+		List<EligibilityDetails> entities = eligRepo.findAll();
+		
+		HSSFWorkbook workbook = new HSSFWorkbook();
+		HSSFSheet sheet = workbook.createSheet();
+		HSSFRow headerRow = sheet.createRow(0);
+		
+		headerRow.createCell(0).setCellValue("Name");
+		headerRow.createCell(1).setCellValue("Mobile");
+		headerRow.createCell(2).setCellValue("Gender");
+		headerRow.createCell(3).setCellValue("SSN");
+		
+		entities.forEach(entity -> {
+			int i=1;
+			
+			HSSFRow dataRow = sheet.createRow(i);
+			dataRow.createCell(0).setCellValue(entity.getName());
+			dataRow.createCell(1).setCellValue(entity.getMobile());
+			dataRow.createCell(2).setCellValue(entity.getGender());
+			dataRow.createCell(3).setCellValue(entity.getSsn());
+			
+			i++;
+		});
 
 	}
 
