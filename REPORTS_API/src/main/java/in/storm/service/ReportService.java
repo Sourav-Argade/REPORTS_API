@@ -1,6 +1,9 @@
 package in.storm.service;
 
+import java.io.IOException;
 import java.util.List;
+
+import com.lowagie.text.DocumentException;
 
 import in.storm.request.SearchRequest;
 import in.storm.response.SearchResponse;
@@ -14,7 +17,7 @@ public interface ReportService {
 	
 	public List<SearchResponse> search(SearchRequest request);
 	
-	public void generateExcel(HttpServletResponse response);
+	public void generateExcel(HttpServletResponse response) throws Exception;
 	
-	public void generatePdf(HttpServletResponse response);
+	public void generatePdf(HttpServletResponse response) throws Exception;
 }
