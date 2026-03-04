@@ -13,6 +13,8 @@ import in.storm.request.SearchRequest;
 import in.storm.response.SearchResponse;
 import in.storm.service.ReportService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
 public class ReportRestController {
@@ -42,5 +44,29 @@ public class ReportRestController {
 		return new ResponseEntity<>(response, HttpStatus.OK);
 		
 	}
+	
+	@GetMapping("/excel")
+	public void excelReport(HttpServletResponse response) throws Exception {
+		response.setContentType("application/octet-stream");
+		
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment;fileName=data.xlsx";
+		response.setHeader(headerKey, headerValue);
+		
+		service.generateExcel(response);
+	}
+	
+	@GetMapping("/pdf")
+	public void pdfReport(HttpServletResponse response) throws Exception {
+		response.setContentType("application/pdf");
+		
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment;fileName=data.pdf";
+		
+		response.setHeader(headerKey, headerValue);
+		service.generatePdf(response);
+		
+	}
+	
 
 }
