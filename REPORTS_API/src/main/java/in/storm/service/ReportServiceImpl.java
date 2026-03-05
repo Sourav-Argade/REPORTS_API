@@ -104,18 +104,19 @@ public class ReportServiceImpl implements ReportService {
 		headerRow.createCell(3).setCellValue("Gender");
 		headerRow.createCell(4).setCellValue("SSN");
 		
-		entities.forEach(entity -> {
+		
 			int i=1;
 			
+			for(EligibilityDetails entity : entities) {
 			HSSFRow dataRow = sheet.createRow(i);
 			dataRow.createCell(0).setCellValue(entity.getName());
 			dataRow.createCell(1).setCellValue(entity.getEmail());
-			dataRow.createCell(2).setCellValue(entity.getMobile());
-			dataRow.createCell(3).setCellValue(entity.getGender());
-			dataRow.createCell(4).setCellValue(entity.getSsn());
+			dataRow.createCell(2).setCellValue(String.valueOf(entity.getMobile()));
+			dataRow.createCell(3).setCellValue(String.valueOf(entity.getGender()));
+			dataRow.createCell(4).setCellValue(String.valueOf(entity.getSsn()));
 			
 			i++;
-		});
+		}
 		
 		ServletOutputStream outputStream = response.getOutputStream();
 		workBook.write(outputStream);
@@ -146,7 +147,7 @@ public class ReportServiceImpl implements ReportService {
 		
 		PdfPTable table = new PdfPTable(5);
 		table.setWidthPercentage(100f);
-        table.setWidths(new float[] {1.5f, 3.5f, 3.0f, 3.0f, 1.5f});
+        table.setWidths(new float[] {1.5f, 3.5f, 3.0f, 2.0f, 3.0f});
         table.setSpacingBefore(10);
         
         PdfPCell cell = new PdfPCell();
@@ -179,6 +180,8 @@ public class ReportServiceImpl implements ReportService {
         	table.addCell(String.valueOf(entity.getSsn()));
         	
         }
+        document.add(table);
+        document.close();
 
 	}
 

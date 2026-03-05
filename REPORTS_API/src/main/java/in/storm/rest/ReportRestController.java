@@ -50,7 +50,7 @@ public class ReportRestController {
 		response.setContentType("application/octet-stream");
 		
 		String headerKey = "Content-Disposition";
-		String headerValue = "attachment;fileName=data.xlsx";
+		String headerValue = "attachment;fileName=data.xls";
 		response.setHeader(headerKey, headerValue);
 		
 		service.generateExcel(response);
